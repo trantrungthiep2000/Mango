@@ -32,9 +32,9 @@ namespace Mango.Services.CouponAPI.Controllers
         /// CreatedBy: ThiepTT(24/08/2023)
         [HttpGet]
         [Route("GetAllCoupons")]
-        public async Task<ReponseDto<IEnumerable<Coupon>>> GetAllCounpons()
+        public async Task<ResponseDto<IEnumerable<Coupon>>> GetAllCounpons()
         {
-            var response = new ReponseDto<IEnumerable<Coupon>>();
+            var response = new ResponseDto<IEnumerable<Coupon>>();
 
             try
             {
@@ -60,9 +60,9 @@ namespace Mango.Services.CouponAPI.Controllers
         /// CreatedBy: ThiepTT(24/08/2023)
         [HttpGet]
         [Route("GetCouponById/{couponId}")]
-        public async Task<ReponseDto<Coupon>> GetCouponById([Required] int couponId)
+        public async Task<ResponseDto<Coupon>> GetCouponById([Required] int couponId)
         {
-            var response = new ReponseDto<Coupon>();
+            var response = new ResponseDto<Coupon>();
 
             try
             {
@@ -97,9 +97,9 @@ namespace Mango.Services.CouponAPI.Controllers
         /// CreatedBy: ThiepTT(24/08/2023)
         [HttpGet]
         [Route("GetCouponByCode/{couponCode}")]
-        public async Task<ReponseDto<Coupon>> GetCouponByCode([Required] string couponCode)
+        public async Task<ResponseDto<Coupon>> GetCouponByCode([Required] string couponCode)
         {
-            var response = new ReponseDto<Coupon>();
+            var response = new ResponseDto<Coupon>();
 
             try
             {
@@ -133,9 +133,9 @@ namespace Mango.Services.CouponAPI.Controllers
         /// CreatedBy: ThiepTT(24/08/2023)
         [HttpPost]
         [Route("CreateCoupon")]
-        public async Task<ReponseDto<int>> CreateCoupon([FromBody] CouponDto coupon)
+        public async Task<ResponseDto<int>> CreateCoupon([FromBody] CouponDto coupon)
         {
-            var response = new ReponseDto<int>();
+            var response = new ResponseDto<int>();
 
             try
             {
@@ -160,9 +160,9 @@ namespace Mango.Services.CouponAPI.Controllers
         /// CreatedBy: ThiepTT(24/08/2023)
         [HttpPut]
         [Route("UpdateCoupon/{couponId}")]
-        public async Task<ReponseDto<int>> UpdateCoupon([FromBody] CouponDto coupon,[Required] int couponId)
+        public async Task<ResponseDto<int>> UpdateCoupon([FromBody] CouponDto coupon,[Required] int couponId)
         {
-            var response = new ReponseDto<int>();
+            var response = new ResponseDto<int>();
 
             try
             {
@@ -198,9 +198,9 @@ namespace Mango.Services.CouponAPI.Controllers
         /// CreatedBy: ThiepTT(24/08/2023)
         [HttpDelete]
         [Route("DeleteCoupon/{couponId}")]
-        public async Task<ReponseDto<int>> DeleteCoupon([Required] int couponId)
+        public async Task<ResponseDto<int>> DeleteCoupon([Required] int couponId)
         {
-            var response = new ReponseDto<int>();
+            var response = new ResponseDto<int>();
 
             try
             {

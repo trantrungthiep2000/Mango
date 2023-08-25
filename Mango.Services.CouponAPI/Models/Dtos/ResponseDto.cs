@@ -4,7 +4,8 @@
     /// Information of response dto
     /// CreatedBy: ThiepTT(24/08/2023)
     /// </summary>
-    public class ReponseDto<T>
+    /// <typeparam name="T">Type</typeparam>
+    public class ResponseDto<T>
     {
         /// <summary>
         /// Result of response
