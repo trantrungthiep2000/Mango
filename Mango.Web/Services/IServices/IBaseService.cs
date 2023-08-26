@@ -14,6 +14,6 @@ namespace Mango.Web.Services.IServices
         /// </summary>
         /// <param name="requestDto">RequestDto</param>
         /// <returns>ReponseDto</returns>
-        Task<ResponseDto<T>?> SendAsync(RequestDto<T> requestDto);
+        public Task<ResponseDto<T>?> SendAsync(RequestDto<T> requestDto);
     }
 }
