@@ -4,13 +4,12 @@
     /// Information of response dto
     /// CreatedBy: ThiepTT(24/08/2023)
     /// </summary>
-    /// <typeparam name="T">Type</typeparam>
-    public class ResponseDto<T>
+    public class ResponseDto
     {
         /// <summary>
         /// Result of response
         /// </summary>
-        public T? Result { get; set; }
+        public object? Result { get; set; }
 
         /// <summary>
         /// Is success

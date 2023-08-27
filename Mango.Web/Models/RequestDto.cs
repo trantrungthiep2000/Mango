@@ -6,8 +6,7 @@ namespace Mango.Web.Models
     /// Information of request dto
     /// CreatedBy: ThiepTT(25/08/2023)
     /// </summary>
-    /// <typeparam name="T">Type</typeparam>
-    public class RequestDto<T>
+    public class RequestDto
     {
         /// <summary>
         /// Api type
@@ -22,7 +21,7 @@ namespace Mango.Web.Models
         /// <summary>
         /// Data
         /// </summary>
-        public T? Data { get; set; }
+        public object? Data { get; set; }
 
         /// <summary>
         /// Access token

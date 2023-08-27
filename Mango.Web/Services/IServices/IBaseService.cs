@@ -6,14 +6,14 @@ namespace Mango.Web.Services.IServices
     /// Information of interface base service
     /// CreatedBy: ThiepTT(25/08/2023)
     /// </summary>
-    /// <typeparam name="T">Type</typeparam>
-    public interface IBaseService<T> where T : class
+    public interface IBaseService
     {
         /// <summary>
         /// Send async
         /// </summary>
         /// <param name="requestDto">RequestDto</param>
         /// <returns>ReponseDto</returns>
-        public Task<ResponseDto<T>?> SendAsync(RequestDto<T> requestDto);
+        /// CreatedBy: ThiepTT(25/08/2023)
+        public Task<ResponseDto?> SendAsync(RequestDto requestDto);
     }
 }

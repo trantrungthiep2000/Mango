@@ -11,8 +11,7 @@ namespace Mango.Web.Services
     /// Information of base service
     /// CreatedBy: ThiepTT(25/08/2023)
     /// </summary>
-    /// <typeparam name="T">Type</typeparam>
-    public class BaseService<T> : IBaseService<T> where T : class
+    public class BaseService : IBaseService
     {
         private readonly IHttpClientFactory _httpClientFactory;
         
@@ -27,7 +26,7 @@ namespace Mango.Web.Services
         /// <param name="requestDto">RequestDto</param>
         /// <returns>ResponseDto</returns>
         /// CreatedBy: ThiepTT(25/08/2023)
-        public async Task<ResponseDto<T>?> SendAsync(RequestDto<T> requestDto)
+        public async Task<ResponseDto?> SendAsync(RequestDto requestDto)
         {
             try
             {
@@ -76,14 +75,14 @@ namespace Mango.Web.Services
                         return new() { IsSuccess = false, Message = "Internal Server Error" };
                     default:
                         var apiContent = await apiResponse.Content.ReadAsStringAsync();
-                        var apiResponseDto = JsonConvert.DeserializeObject<ResponseDto<T>>(apiContent);
+                        var apiResponseDto = JsonConvert.DeserializeObject<ResponseDto>(apiContent);
 
                         return apiResponseDto;
                 }
             }
             catch (Exception ex)
             {
-                var dto = new ResponseDto<T>
+                var dto = new ResponseDto
                 {
                     IsSuccess = false,
                     Message = ex.Message.ToString(),

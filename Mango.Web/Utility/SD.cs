@@ -6,6 +6,11 @@
     /// </summary>
     public class SD
     {
+        /// <summary>
+        /// Coupon API base
+        /// </summary>
+        public static string CouponAPIBase { get; set; } = string.Empty;
+
         public enum ApiType
         {
             GET,
