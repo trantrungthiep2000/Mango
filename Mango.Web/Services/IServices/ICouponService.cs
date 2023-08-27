@@ -54,6 +54,6 @@ namespace Mango.Web.Services.IServices
         /// <param name="couponId">Id of coupon</param>
         /// <returns>number coupon delete success</returns>
         /// CreatedBy: ThiepTT(26/08/2023)
-        public Task<ResponseDto?> DeleteCouponAsync(int couponId);
+        public Task<ResponseDto?> DeleteCouponAsync(Coupon coupon);
     }
 }

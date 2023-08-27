@@ -14,7 +14,7 @@
         /// <summary>
         /// Is success
         /// </summary>
-        public bool IsSuccess { get; set; } = false;
+        public bool IsSuccess { get; set; } = true;
 
         /// <summary>
         /// Message of response

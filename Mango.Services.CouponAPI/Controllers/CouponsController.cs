@@ -133,13 +133,15 @@ namespace Mango.Services.CouponAPI.Controllers
         /// CreatedBy: ThiepTT(24/08/2023)
         [HttpPost]
         [Route("CreateCoupon")]
-        public async Task<ResponseDto> CreateCoupon([FromBody] CouponDto coupon)
+        public async Task<ResponseDto> CreateCoupon([FromBody] CouponDto couponCreate)
         {
             var response = new ResponseDto();
 
             try
             {
-                _appDbContext.Add(coupon);
+                var coupon = _mapper.Map<Coupon>(couponCreate);
+
+                _appDbContext.Coupons.Add(coupon);
                 response.Result = await _appDbContext.SaveChangesAsync();
             }
             catch (Exception ex)

@@ -98,15 +98,15 @@ namespace Mango.Web.Services
         /// <summary>
         /// Delete a coupon async
         /// </summary>
-        /// <param name="couponId">Id of coupon</param>
+        /// <param name="coupon">Coupon</param>
         /// <returns>Number coupon delete success</returns>
         /// CreatedBy: ThiepTT(27/08/2023)
-        public async Task<ResponseDto?> DeleteCouponAsync(int couponId)
+        public async Task<ResponseDto?> DeleteCouponAsync(Coupon coupon)
         {
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = SD.ApiType.DELETE,
-                Url = SD.CouponAPIBase + $"/api/Coupons/DeleteCoupon/{couponId}",
+                Url = SD.CouponAPIBase + $"/api/Coupons/DeleteCoupon/{coupon.CouponId}",
             });
         }
     }
