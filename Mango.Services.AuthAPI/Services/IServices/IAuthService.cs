@@ -24,5 +24,14 @@ namespace Mango.Services.AuthAPI.Services.IServices
         /// <returns>Information of user and token</returns>
         /// CreatedBy: ThiepTT(29/08/2023)
         public Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto);
+
+        /// <summary>
+        /// Assign role
+        /// </summary>
+        /// <param name="email">Email of user</param>
+        /// <param name="roleName">Name of role</param>
+        /// <returns>True || false</returns>
+        /// CreatedBy: ThiepTT(30/08/2023)
+        public Task<bool> AssignRole(string email, string roleName);
     }
 }

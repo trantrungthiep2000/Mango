@@ -27,38 +27,6 @@ namespace Mango.Services.AuthAPI.Services
         }
 
         /// <summary>
-        /// Login
-        /// </summary>
-        /// <param name="loginRequestDto">LoginRequestDto</param>
-        /// <returns>Information of user and token</returns>
-        /// CreatedBy: ThiepTT(29/08/2023)
-        public async Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto)
-        {
-            var userByUsername = await _appDbContext.applicationUsers.FirstOrDefaultAsync(u => u.UserName!.ToLower() == loginRequestDto.UserName.ToLower());
-
-            bool isValid = await _userManager.CheckPasswordAsync(userByUsername!, loginRequestDto.Password);
-
-            if (userByUsername == null || isValid == false)
-            {
-                return new LoginResponseDto(){ User = null!, Token = "", };
-            }
-
-            var token = _jwtTokenGenerator.GenerateToken(userByUsername);
-
-            User user = new User()
-            {
-                Email = userByUsername.Email!,
-                ID = userByUsername.Id,
-                Name = userByUsername.Name,
-                PhoneNumber = userByUsername.PhoneNumber!,
-            };
-
-            LoginResponseDto loginResponseDto = new LoginResponseDto() { User = user, Token = token };
-
-            return loginResponseDto;
-        }
-
-        /// <summary>
         /// Register
         /// </summary>
         /// <param name="registerationRequestDto">RegisterationRequestDto</param>
@@ -104,6 +72,63 @@ namespace Mango.Services.AuthAPI.Services
             }
 
             return "Error Encountered";
+        }
+
+        /// <summary>
+        /// Login
+        /// </summary>
+        /// <param name="loginRequestDto">LoginRequestDto</param>
+        /// <returns>Information of user and token</returns>
+        /// CreatedBy: ThiepTT(29/08/2023)
+        public async Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto)
+        {
+            var userByUsername = await _appDbContext.applicationUsers.FirstOrDefaultAsync(u => u.UserName!.ToLower() == loginRequestDto.UserName.ToLower());
+
+            bool isValid = await _userManager.CheckPasswordAsync(userByUsername!, loginRequestDto.Password);
+
+            if (userByUsername == null || isValid == false)
+            {
+                return new LoginResponseDto(){ User = null!, Token = "", };
+            }
+
+            var token = _jwtTokenGenerator.GenerateToken(userByUsername);
+
+            User user = new User()
+            {
+                Email = userByUsername.Email!,
+                ID = userByUsername.Id,
+                Name = userByUsername.Name,
+                PhoneNumber = userByUsername.PhoneNumber!,
+            };
+
+            LoginResponseDto loginResponseDto = new LoginResponseDto() { User = user, Token = token };
+
+            return loginResponseDto;
+        }
+
+        /// <summary>
+        /// Assign role
+        /// </summary>
+        /// <param name="email">Email of user</param>
+        /// <param name="roleName">Name of role</param>
+        /// <returns>True || false</returns>
+        /// CreatedBy: ThiepTT(30/08/2023)
+        public async Task<bool> AssignRole(string email, string roleName)
+        {
+            var userByEmail = await _appDbContext.applicationUsers.FirstOrDefaultAsync(u => u.Email!.ToLower() == email.ToLower());
+
+            if (userByEmail != null)
+            {
+                if (!_roleManager.RoleExistsAsync(roleName).GetAwaiter().GetResult())
+                {
+                    _roleManager.CreateAsync(new IdentityRole(roleName)).GetAwaiter().GetResult();
+                }
+
+                await _userManager.AddToRoleAsync(userByEmail, roleName);
+                return true;
+            }
+
+            return false;
         }
     }
 }
