@@ -11,6 +11,26 @@
         /// </summary>
         public static string CouponAPIBase { get; set; } = string.Empty;
 
+        /// <summary>
+        /// Auth API base
+        /// </summary>
+        public static string AuthAPIBase { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Role admin
+        /// </summary>
+        public const string RoleAdmin = "ADMIN";
+
+        /// <summary>
+        /// Role customer
+        /// </summary>
+        public const string RoleCustomer = "CUSTOMER";
+
+        /// <summary>
+        /// Token cookie
+        /// </summary>
+        public const string TokenCookie = "JWTToken";
+
         public enum ApiType
         {
             GET,

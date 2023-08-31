@@ -41,11 +41,22 @@ namespace Mango.Web.Controllers
             return View(coupons);
         }
 
-        public async Task<IActionResult> CouponCreate()
+        /// <summary>
+        /// Coupon create
+        /// </summary>
+        /// <returns>IActionResult</returns>
+        /// CreatedBy: ThiepTT(27/08/2023)
+        public IActionResult CouponCreate()
         {
             return View();
         }
 
+        /// <summary>
+        /// Coupon create
+        /// </summary>
+        /// <param name="couponDto">CouponDto</param>
+        /// <returns>IActionResult</returns>
+        /// CreatedBy: ThiepTT(27/08/2023)
         [HttpPost]
         public async Task<IActionResult> CouponCreate(CouponDto couponDto)
         {
@@ -67,6 +78,12 @@ namespace Mango.Web.Controllers
             return View(couponDto);
         }
 
+        /// <summary>
+        /// Coupon delete
+        /// </summary>
+        /// <param name="couponId">Id of coupon</param>
+        /// <returns>IActionResult</returns>
+        /// CreatedBy: ThiepTT(27/08/2023)
         public async Task<IActionResult> CouponDelete(int couponId)
         {
             var response = await _couponService.GetCouponByIdAsync(couponId);
@@ -85,6 +102,12 @@ namespace Mango.Web.Controllers
             return NotFound();
         }
 
+        /// <summary>
+        /// Coupon delete
+        /// </summary>
+        /// <param name="coupon">Coupon</param>
+        /// <returns>IActionResult</returns>
+        /// CreatedBy: ThiepTT(27/08/2023)
         [HttpPost]
         public async Task<IActionResult> CouponDelete(Coupon coupon)
         {
