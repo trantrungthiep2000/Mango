@@ -12,8 +12,9 @@ namespace Mango.Web.Services.IServices
         /// Send async
         /// </summary>
         /// <param name="requestDto">RequestDto</param>
+        /// <param name="withBearer">WithBearer</param>
         /// <returns>ReponseDto</returns>
         /// CreatedBy: ThiepTT(25/08/2023)
-        public Task<ResponseDto?> SendAsync(RequestDto requestDto);
+        public Task<ResponseDto?> SendAsync(RequestDto requestDto, bool withBearer = true);
     }
 }

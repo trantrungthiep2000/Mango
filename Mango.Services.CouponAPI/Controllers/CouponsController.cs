@@ -2,6 +2,7 @@
 using Mango.CouponAPI.Data;
 using Mango.Services.CouponAPI.Models;
 using Mango.Services.CouponAPI.Models.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
@@ -14,6 +15,7 @@ namespace Mango.Services.CouponAPI.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CouponsController : ControllerBase
     {
         private readonly AppDbContext _appDbContext;
@@ -133,6 +135,7 @@ namespace Mango.Services.CouponAPI.Controllers
         /// CreatedBy: ThiepTT(24/08/2023)
         [HttpPost]
         [Route("CreateCoupon")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<ResponseDto> CreateCoupon([FromBody] CouponDto couponCreate)
         {
             var response = new ResponseDto();
@@ -162,6 +165,7 @@ namespace Mango.Services.CouponAPI.Controllers
         /// CreatedBy: ThiepTT(24/08/2023)
         [HttpPut]
         [Route("UpdateCoupon/{couponId}")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<ResponseDto> UpdateCoupon([FromBody] CouponDto coupon,[Required] int couponId)
         {
             var response = new ResponseDto();
@@ -200,6 +204,7 @@ namespace Mango.Services.CouponAPI.Controllers
         /// CreatedBy: ThiepTT(24/08/2023)
         [HttpDelete]
         [Route("DeleteCoupon/{couponId}")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<ResponseDto> DeleteCoupon([Required] int couponId)
         {
             var response = new ResponseDto();
