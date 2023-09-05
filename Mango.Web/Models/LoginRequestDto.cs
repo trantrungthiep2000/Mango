@@ -1,4 +1,6 @@
-﻿namespace Mango.Web.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Mango.Web.Models
 {
     /// <summary>
     /// Information of login request dto
@@ -9,11 +11,13 @@
         /// <summary>
         /// User name
         /// </summary>
+        [Required]
         public string UserName { get; set; } = string.Empty;
 
         /// <summary>
         /// Password
         /// </summary>
+        [Required]
         public string Password { get; set; } = string.Empty;
     }
 }
