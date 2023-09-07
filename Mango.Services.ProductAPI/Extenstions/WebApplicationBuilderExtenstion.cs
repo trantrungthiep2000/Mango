@@ -2,11 +2,11 @@
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace Mango.Services.CouponAPI.Extenstions
+namespace Mango.Services.ProductAPI.Extenstions
 {
     /// <summary>
-    /// Information of web application builder extenstion 
-    /// CreatedBy: ThiepTT(05/09/2023)
+    /// Information of web application builder extenstion
+    /// CreatedBy: ThiepTT(06/09/2023)
     /// </summary>
     public static class WebApplicationBuilderExtenstion
     {
@@ -15,7 +15,7 @@ namespace Mango.Services.CouponAPI.Extenstions
         /// </summary>
         /// <param name="builder"><WebApplicationBuilder/param>
         /// <returns>WebApplicationBuilder</returns>
-        /// CreatedBy: ThiepTT(05/09/2023)
+        /// CreatedBy: ThiepTT(06/09/2023)
         public static WebApplicationBuilder AddAppAuthentication(this WebApplicationBuilder builder)
         {
             var settingsSection = builder.Configuration.GetSection("ApiSettings");

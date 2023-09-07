@@ -24,6 +24,7 @@ namespace Mango.Services.AuthAPI.Services
         /// Generate token
         /// </summary>
         /// <param name="applicationUser">ApplicationUser</param>
+        /// <param name="roles">List of role</param>
         /// <returns>Token</returns>
         /// CreatedBy: ThiepTT(29/08/2023)
         public string GenerateToken(ApplicationUser applicationUser, IEnumerable<string> roles)

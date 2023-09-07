@@ -17,6 +17,11 @@
         public static string AuthAPIBase { get; set; } = string.Empty;
 
         /// <summary>
+        /// Product API base
+        /// </summary>
+        public static string ProductAPIBase { get; set; } = string.Empty;
+
+        /// <summary>
         /// Role admin
         /// </summary>
         public const string RoleAdmin = "ADMIN";

@@ -130,12 +130,12 @@ namespace Mango.Services.CouponAPI.Controllers
         /// <summary>
         /// Create coupon
         /// </summary>
-        /// <param name="coupon">CouponDto</param>
+        /// <param name="couponCreate">CouponDto</param>
         /// <returns>Number coupon create success</returns>
         /// CreatedBy: ThiepTT(24/08/2023)
         [HttpPost]
         [Route("CreateCoupon")]
-        [Authorize(Roles = "ADMIN")]
+        [Authorize(Roles = "Admin")]
         public async Task<ResponseDto> CreateCoupon([FromBody] CouponDto couponCreate)
         {
             var response = new ResponseDto();
@@ -165,7 +165,7 @@ namespace Mango.Services.CouponAPI.Controllers
         /// CreatedBy: ThiepTT(24/08/2023)
         [HttpPut]
         [Route("UpdateCoupon/{couponId}")]
-        [Authorize(Roles = "ADMIN")]
+        [Authorize(Roles = "Admin")]
         public async Task<ResponseDto> UpdateCoupon([FromBody] CouponDto coupon,[Required] int couponId)
         {
             var response = new ResponseDto();
@@ -182,7 +182,9 @@ namespace Mango.Services.CouponAPI.Controllers
                     return response;
                 }
 
-                couponById = _mapper.Map<Coupon>(coupon);
+                couponById.CouponCode = coupon.CouponCode;
+                couponById.DiscountAmount = coupon.DiscountAmount;
+                couponById.MinAmount = coupon.MinAmount;
 
                 _appDbContext.Update(couponById);
                 response.Result = await _appDbContext.SaveChangesAsync();
@@ -204,7 +206,7 @@ namespace Mango.Services.CouponAPI.Controllers
         /// CreatedBy: ThiepTT(24/08/2023)
         [HttpDelete]
         [Route("DeleteCoupon/{couponId}")]
-        [Authorize(Roles = "ADMIN")]
+        [Authorize(Roles = "Admin")]
         public async Task<ResponseDto> DeleteCoupon([Required] int couponId)
         {
             var response = new ResponseDto();

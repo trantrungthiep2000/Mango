@@ -81,17 +81,16 @@ namespace Mango.Web.Services
         /// <summary>
         /// Update a coupon async
         /// </summary>
-        /// <param name="couponDto">CouponDto</param>
-        /// <param name="couponId">Id of coupon</param>
+        /// <param name="coupon">Coupon</param>
         /// <returns>Number coupon update success</returns>
         /// CreatedBy: ThiepTT(27/08/2023)
-        public async Task<ResponseDto?> UpdateCouponAsync(CouponDto couponDto, int couponId)
+        public async Task<ResponseDto?> UpdateCouponAsync(Coupon coupon)
         {
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = SD.ApiType.PUT,
-                Url = SD.CouponAPIBase + $"/api/Coupons/UpdateCoupon/{couponId}",
-                Data = couponDto,
+                Url = SD.CouponAPIBase + $"/api/Coupons/UpdateCoupon/{coupon.CouponId}",
+                Data = coupon,
             });
         }
 

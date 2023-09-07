@@ -13,8 +13,16 @@ namespace Mango.CouponAPI.Data
         {
         }
 
+        /// <summary>
+        /// Coupons
+        /// </summary>
         public DbSet<Coupon> Coupons { get; set; }
 
+        /// <summary>
+        /// On model creating
+        /// </summary>
+        /// <param name="modelBuilder">ModelBuilder</param>
+        /// CreatedBy: ThiepTT(24/08/2023)
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

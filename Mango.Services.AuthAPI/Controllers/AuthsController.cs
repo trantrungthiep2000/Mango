@@ -70,6 +70,12 @@ namespace Mango.Services.AuthAPI.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Assign role
+        /// </summary>
+        /// <param name="assignRoleRequestDto">AssignRoleRequestDto</param>
+        /// <returns>IActionResult</returns>
+        /// CreatedBy: ThiepTT(29/08/2023)
         [HttpPost]
         [Route("AssignRole")]
         public async Task<IActionResult> AssignRole([FromBody] AssignRoleRequestDto assignRoleRequestDto)

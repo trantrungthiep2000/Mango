@@ -42,11 +42,10 @@ namespace Mango.Web.Services.IServices
         /// <summary>
         /// Update a coupon async
         /// </summary>
-        /// <param name="couponDto">CouponDto</param>
-        /// <param name="couponId">Id of coupon</param>
+        /// <param name="coupon">Coupon</param>
         /// <returns>Number coupon update success</returns>
         /// CreatedBy: ThiepTT(26/08/2023)
-        public Task<ResponseDto?> UpdateCouponAsync(CouponDto couponDto, int couponId);
+        public Task<ResponseDto?> UpdateCouponAsync(Coupon coupon);
 
         /// <summary>
         /// Delete a coupon async
