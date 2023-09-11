@@ -46,6 +46,31 @@ namespace Mango.Web.Controllers
             return View(products);
         }
 
+        /// <summary>
+        /// Product details
+        /// </summary>
+        /// <param name="productId">Id of product</param>
+        /// <returns>IActionResult</returns>
+        /// CreatedBy: ThiepTT(11/09/2023)
+        [Authorize]
+        public async Task<IActionResult> ProductDetails(int productId)
+        {
+            var product = new Product();
+
+            var response = await _productService.GetProductByIdAsync(productId);
+
+            if (response != null && response.IsSuccess)
+            {
+                product = JsonConvert.DeserializeObject<Product>(Convert.ToString(response.Result)!);
+            }
+            else
+            {
+                TempData["error"] = response?.Message;
+            }
+
+            return View(product);
+        }
+
         [Authorize(Roles = SD.RoleAdmin)]
         public IActionResult Privacy()
         {

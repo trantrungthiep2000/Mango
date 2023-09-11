@@ -1,4 +1,6 @@
-﻿namespace Mango.Web.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Mango.Web.Models
 {
     /// <summary>
     /// Information of product
@@ -35,5 +37,11 @@
         /// Url of image
         /// </summary>
         public string ImageUrl { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Count
+        /// </summary>
+        [Range(1, 100)]
+        public int Count { get; set; } = 1;
     }
 }

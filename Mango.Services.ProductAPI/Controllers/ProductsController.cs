@@ -96,7 +96,7 @@ namespace Mango.Services.ProductAPI.Controllers
         /// CreatedBy: ThiepTT(06/09/2023)
         [HttpPost]
         [Route("CreateProduct")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<ResponseDto> CreateProduct([FromBody] ProductDto productDto)
         {
             var response = new ResponseDto();
@@ -126,7 +126,7 @@ namespace Mango.Services.ProductAPI.Controllers
         /// CreatedBy: ThiepTT(24/08/2023)
         [HttpPut]
         [Route("UpdateProduct/{productId}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<ResponseDto> UpdateProduct([FromBody] ProductDto product, [Required] int productId)
         {
             var response = new ResponseDto();
@@ -169,7 +169,7 @@ namespace Mango.Services.ProductAPI.Controllers
         /// CreatedBy: ThiepTT(06/09/2023)
         [HttpDelete]
         [Route("DeleteProduct/{productId}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<ResponseDto> DeleteProduct([Required] int productId)
         {
             var response = new ResponseDto();

@@ -135,7 +135,7 @@ namespace Mango.Services.CouponAPI.Controllers
         /// CreatedBy: ThiepTT(24/08/2023)
         [HttpPost]
         [Route("CreateCoupon")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<ResponseDto> CreateCoupon([FromBody] CouponDto couponCreate)
         {
             var response = new ResponseDto();
@@ -206,7 +206,7 @@ namespace Mango.Services.CouponAPI.Controllers
         /// CreatedBy: ThiepTT(24/08/2023)
         [HttpDelete]
         [Route("DeleteCoupon/{couponId}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<ResponseDto> DeleteCoupon([Required] int couponId)
         {
             var response = new ResponseDto();

@@ -68,7 +68,6 @@ namespace Mango.Services.AuthAPI.Services
             }
             catch (Exception ex)
             {
-
             }
 
             return "Error Encountered";
