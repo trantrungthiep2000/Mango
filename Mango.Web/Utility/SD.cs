@@ -22,6 +22,11 @@
         public static string ProductAPIBase { get; set; } = string.Empty;
 
         /// <summary>
+        /// Shopping cart API base
+        /// </summary>
+        public static string ShoppingCartAPIBase { get; set; } = string.Empty;
+
+        /// <summary>
         /// Role admin
         /// </summary>
         public const string RoleAdmin = "ADMIN";

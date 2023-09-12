@@ -1,4 +1,5 @@
-﻿using Mango.Web.Models;
+﻿using IdentityModel;
+using Mango.Web.Models;
 using Mango.Web.Services.IServices;
 using Mango.Web.Utility;
 using Microsoft.AspNetCore.Authorization;
@@ -16,11 +17,13 @@ namespace Mango.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProductService _productService;
+        private readonly ICartService _cartService;
 
-        public HomeController(ILogger<HomeController> logger, IProductService productService)
+        public HomeController(ILogger<HomeController> logger, IProductService productService, ICartService cartService)
         {
             _logger = logger;
             _productService = productService;
+            _cartService = cartService;
         }
 
         /// <summary>
@@ -62,6 +65,48 @@ namespace Mango.Web.Controllers
             if (response != null && response.IsSuccess)
             {
                 product = JsonConvert.DeserializeObject<Product>(Convert.ToString(response.Result)!);
+            }
+            else
+            {
+                TempData["error"] = response?.Message;
+            }
+
+            return View(product);
+        }
+
+        /// <summary>
+        /// Product details
+        /// </summary>
+        /// <param name="product">Product</param>
+        /// <returns>IActionResult</returns>
+        /// CreatedBy: ThiepTT(12/09/2023)
+        [Authorize]
+        [HttpPost]
+        [ActionName("ProductDetails")]
+        public async Task<IActionResult> ProductDetails(Product product)
+        {
+            var cart = new CartDto()
+            {
+                CartHeader = new CartHeader()
+                {
+                    UserId = User.Claims.Where(u => u.Type == JwtClaimTypes.Subject)?.FirstOrDefault()?.Value!,
+                }
+            };
+
+            var cartDetails = new CartDetails()
+            {
+                Count = product.Count,
+                ProductId = product.ProductId,
+            };
+
+            var listCarrtDetails = new List<CartDetails>() { cartDetails };
+            cart.CartDetails = listCarrtDetails;
+            var response = await _cartService.CartUpsertAsync(cart);
+
+            if (response != null && response.IsSuccess)
+            {
+                TempData["success"] = "Item has been added to the Shopping Cart";
+                return RedirectToAction(nameof(Index));
             }
             else
             {
