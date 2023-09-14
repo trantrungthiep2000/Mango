@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
+using Mango.MessageBus;
 using Mango.Services.ShoppingCartAPI.Data;
 using Mango.Services.ShoppingCartAPI.Models;
 using Mango.Services.ShoppingCartAPI.Models.Dtos;
 using Mango.Services.ShoppingCartAPI.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.PortableExecutable;
-using System.Runtime.InteropServices;
 
 namespace Mango.Services.ShoppingCartAPI.Controllers
 {
@@ -22,13 +21,17 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
         private readonly IMapper _mapper;
         private readonly IProductService _productService;
         private readonly ICouponService _couponService;
+        private readonly IMessageBus _messageBus;
+        private readonly IConfiguration _configuration;
 
-        public CartsController(AppDbContext appDbContext, IMapper mapper, IProductService productService, ICouponService couponService)
+        public CartsController(AppDbContext appDbContext, IMapper mapper, IProductService productService, ICouponService couponService, IMessageBus messageBus, IConfiguration configuration)
         {
             _appDbContext = appDbContext;
             _mapper = mapper;
             _productService = productService;
             _couponService = couponService;
+            _messageBus = messageBus;
+            _configuration = configuration;
         }
 
         /// <summary>
@@ -120,6 +123,32 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
         }
 
         /// <summary>
+        /// Email cart request
+        /// </summary>
+        /// <param name="cartDto">CartDto</param>
+        /// <returns>ResponseDto</returns>
+        /// CreatedBy: ThiepTT(13/09/2023)
+        [HttpPost]
+        [Route("EmailCartRequest")]
+        public async Task<ResponseDto> EmailCartRequest(CartDto cartDto)
+        {
+            var response = new ResponseDto();
+
+            try
+            {
+                await _messageBus.PublishMessage(cartDto, _configuration.GetValue<string>("TopicAndQueueNames:EmailShoppingCartQueue")!);
+                response.Result = true;
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message.ToString();
+                response.IsSuccess = false;
+            }
+
+            return response;
+        }
+
+        /// <summary>
         /// Cart upsert
         /// </summary>
         /// <param name="cartDto">CartDto</param>
@@ -129,7 +158,7 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
         [Route("CartUpsert")]
         public async Task<ResponseDto> CartUpsert(CartDto cartDto)
         {
-            var response  = new  ResponseDto();
+            var response = new ResponseDto();
 
             try
             {
@@ -143,19 +172,19 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
                 {
                     // create cart header and cart details
                     var cartHeader = _mapper.Map<CartHeader>(cartDto.CartHeader);
-                    
+
                     _appDbContext.CartHeaders.Add(cartHeader);
                     await _appDbContext.SaveChangesAsync();
 
                     cartDto.CartDetails!.First().CartHeaderId = cartHeader.CartHeaderId;
                     var cartDetails = _mapper.Map<CartDetails>(cartDto.CartDetails!.First());
-                    
+
                     _appDbContext.CartDetails.Add(cartDetails);
                     await _appDbContext.SaveChangesAsync();
                 }
-                else 
+                else
                 {
-                    // get cart details from databse 
+                    // get cart details from databse
                     var cartDetailsFromDb = await _appDbContext.CartDetails
                         .AsNoTracking()
                         .FirstOrDefaultAsync(
@@ -174,7 +203,7 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
                     }
                     else
                     {
-                        // update count cart  
+                        // update count cart
                         cartDto.CartDetails!.First().Count += cartDetailsFromDb.Count;
                         cartDto.CartDetails!.First().CartHeaderId = cartHeaderFromDb.CartHeaderId;
                         cartDto.CartDetails!.First().CartDetailsId = cartDetailsFromDb.CartDetailsId;

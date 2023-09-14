@@ -27,5 +27,25 @@ namespace Mango.Services.ShoppingCartAPI.Models.Dtos
         /// CartTotal
         /// </summary>
         public double CartTotal { get; set; }
+
+        /// <summary>
+        /// First name
+        /// </summary>
+        public string FirstName { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Last name
+        /// </summary>
+        public string LastName { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Phone
+        /// </summary>
+        public string Phone { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Email
+        /// </summary>
+        public string Email { get; set; } = string.Empty;
     }
 }

@@ -1,8 +1,8 @@
-﻿namespace Mango.Web.Models
+﻿namespace Mango.Services.EmailAPI.Models
 {
     /// <summary>
     /// Information of cart header
-    /// CreatedBy: ThiepTT(12/09/2023)
+    /// CreatedBy: ThiepTT(13/09/2023)
     /// </summary>
     public class CartHeader
     {

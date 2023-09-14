@@ -14,7 +14,7 @@ namespace Mango.Web.Services.IServices
         /// <param name="userId">Id of user</param>
         /// <returns>ResponseDto</returns>
         /// CreatedBy: ThiepTT(12/09/2023)
-        Task<ResponseDto?> GetCartByUserIdAsync(string userId);
+        public Task<ResponseDto?> GetCartByUserIdAsync(string userId);
 
         /// <summary>
         /// Cart upsert async
@@ -22,7 +22,7 @@ namespace Mango.Web.Services.IServices
         /// <param name="cartDto">CartDto</param>
         /// <returns>ResponseDto</returns>
         /// CreatedBy: ThiepTT(12/09/2023)
-        Task<ResponseDto?> CartUpsertAsync(CartDto cartDto);
+        public Task<ResponseDto?> CartUpsertAsync(CartDto cartDto);
 
         /// <summary>
         /// Remove from cart async
@@ -30,7 +30,7 @@ namespace Mango.Web.Services.IServices
         /// <param name="cartDetailsId">Id of cart details</param>
         /// <returns>ResponseDto</returns>
         /// CreatedBy: ThiepTT(12/09/2023)
-        Task<ResponseDto?> RemoveFromCartAsync(int cartDetailsId);
+        public Task<ResponseDto?> RemoveFromCartAsync(int cartDetailsId);
 
         /// <summary>
         /// Apply coupon async
@@ -38,6 +38,14 @@ namespace Mango.Web.Services.IServices
         /// <param name="cartDto">CartDto</param>
         /// <returns>ResponseDto</returns>
         /// CreatedBy: ThiepTT(12/09/2023)
-        Task<ResponseDto?> ApplyCouponAsync(CartDto cartDto);
+        public Task<ResponseDto?> ApplyCouponAsync(CartDto cartDto);
+
+        /// <summary>
+        /// Email cart
+        /// </summary>
+        /// <param name="cartDto">CartDto</param>
+        /// <returns>ResponseDto</returns>
+        /// CreatedBy: ThiepTT(13/09/2023)
+        public Task<ResponseDto?> EmailCartAsync(CartDto cartDto);
     }
 }
